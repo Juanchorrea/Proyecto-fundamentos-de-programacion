@@ -1,35 +1,39 @@
 import pandas as pd
 from openpyxl import load_workbook
 
+# 1️⃣ Leer el archivo Excel original
+archivo = "proyecto_fun.xlsx"
+df = pd.read_excel(archivo, header=None)
 
-df=pd.read_excel("proyecto_fun.xlsx",header=None)
-datos=pd.Series(df[1].values,index=df[0]).to_dict()
+# 2️⃣ Convertir los datos en un diccionario para trabajar fácilmente
+datos = pd.Series(df[1].values, index=df[0]).to_dict()
 
+# 3️⃣ Extraer valores necesarios
+ritmo = float(datos["RITMO(KM/H)"])
+peso = float(datos["PESO(KG)"])
+tiempo = float(datos["DURACION(MIN)"])
 
-ritmo=float(datos["RITMO(KM/H)"])
-peso=float(datos["PESO(KG)"])
-tiempo=float(datos["DURACION(MIN)"])
-
-
+# 4️⃣ Determinar el MET según el ritmo (ejemplo)
 if ritmo >= 6 and ritmo < 14:
-    MET=6
-elif ritmo >= 14 and ritmo < 17:
-    MET=12.5
-elif ritmo >= 17 and ritmo < 20:
-    MET=18
+    MET = 6
+elif ritmo >= 14:
+    MET = 10
 else:
-    print("no es humano")
-    MET=0
+    MET = 3
 
+# 5️⃣ Calcular calorías
+calorias = MET * peso * tiempo / 60
 
-calorias =(MET*peso*tiempo)/60
-print(f"las calorias quemadas son {calorias}")
+print(f"✅ Calorías calculadas: {calorias}")
 
-wb= load_workbook("proyecto_fun.xlsx")
-ws = wb.active
+# 6️⃣ Abrir el archivo Excel para ESCRIBIR el resultado
+libro = load_workbook(archivo)
+hoja = libro.active
 
-for row in ws.iter_rows(min_row=1,max_col=2):
-    if row[0].value and "CALORIAS QUEMADAS" in str(row[0].value).upper():
-        row[1].value = calorias
-        break
-wb.save("proyecto_fun_re.xlsx")
+# En tu captura, "CALORIAS QUEMADAS" está en la fila 9 columna A,
+# así que el resultado va en la celda B9:
+hoja["B9"] = calorias
+
+# 7️⃣ Guardar cambios
+libro.save(archivo)
+print("📁 Archivo actualizado con el resultado en la celda B9 ✅")
