@@ -3,7 +3,6 @@ import pandas as pd
 import os # Importar 'os' para manejar rutas de archivos
 
 # Configuración de la aplicación Flask
-# 🌟 CORRECCIÓN: Se agrega 'static_folder' para evitar el 404 en /diseño
 app = Flask(__name__, static_folder='static') 
 
 ## 1. Ruta de Inicio (GET /)
@@ -16,7 +15,7 @@ def index():
 ## 2. Ruta para Guardar y Calcular (POST /guardar)
 @app.route('/guardar', methods=['POST'])
 def guardar():
-    # 🌟 Captura de datos robusta
+    #  Captura de datos robusta
     name = request.form.get('nombre', '')
     
     # Intenta convertir los datos a float/int, usa 0 o 0.0 si falla
@@ -100,12 +99,5 @@ def guardar():
                             ritmo=ritmo, calorias=calorias)
 
 if __name__ == '__main__':
-    # 🌟 Para usar 'static_folder', debes asegurarte de que tu estructura de carpetas
-    # se vea así:
-    # ├── app.py
-    # ├── templates/
-    # │   └── front.html
-    # └── static/
-    #     └── diseño/
-    #         └── style.css
+
     app.run(debug=True)
