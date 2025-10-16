@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/diseño/style.css">
+    <title>Proyecto De Fundamentos </title>
+</head>
+<body>
+    <form class="container" method="POST" action="/guardar">
+                    <div class="card">
+                <h2>Datos del usuario</h2>
+                <table>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Entrada</th>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td><input type="text"  id="nombre" name="nombre"   placeholder="Juan Pérez" value="{{ nombre }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Edad</td>
+                        <td><input type="number" id="edad" name="edad" placeholder="25" value="{{ edad }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Peso (kg)</td>
+                        <td><input type="number" id="peso" name="peso" placeholder="70" value="{{ peso }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Duración (min)</td>
+                        <td><input type="number" id="tiempo" name="tiempo" placeholder="30" value="{{ tiempo }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Distancia (km)</td>
+                        <td><input type="number" id="distancia" name="distancia" placeholder="3" value="{{ distancia }}"></td>
+                    </tr>
+                </table>
+                <button type="submit">Calcular</button>
+            </div>
+                <div class="card">
+            <h2>Resultados del cálculo</h2>
+            <table>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Ritmo (km/h)</td>
+                    <td><input type="number" id="ritmo" name="ritmo" value="{{ ritmo }}" readonly></td>
+                </tr>
+                <tr>
+                    <td>Calorías quemadas (kcal)</td>
+                    <td><input type="number" id="calorias" name="calorias"  value="{{ calorias }}" readonly></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
